@@ -14,7 +14,7 @@
   /*background: #2196f3;
   transform: rotate(45deg);
   border-radius: 0;*/
-  background: url("imagenes/honjoong.png") no-repeat center center;
+  background: url("images/honjoong.png") no-repeat center center;
   background-size: contain;
   border-radius: 0;
   transform: none;
@@ -25,7 +25,7 @@
   height: 24px;
   /*background: orange;
   border-radius: 50%;*/
-  background: url("imagenes/estrella.png") no-repeat center center;
+  background: url("images/estrella.png") no-repeat center center;
   background-size: contain;
   border-radius: 0;
 }
