@@ -1,0 +1,31 @@
+.game-container {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  background: #c5b4b4;
+  border: 2px solid #134ce9;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.game-player {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  /*background: #2196f3;
+  transform: rotate(45deg);
+  border-radius: 0;*/
+  background: url("imagenes/honjoong.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 0;
+  transform: none;
+}
+.coin {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  /*background: orange;
+  border-radius: 50%;*/
+  background: url("imagenes/estrella.png") no-repeat center center;
+  background-size: contain;
+  border-radius: 0;
+}
