@@ -1,48 +1,54 @@
-let score = 0;
+let score = 0; // Puntaje global
 
 document.addEventListener("DOMContentLoaded", function () {
   const player = document.querySelector(".game-player");
   const gameContainer = document.querySelector(".game-container");
-
   const gameWidth = gameContainer.clientWidth;
   const gameHeight = gameContainer.clientHeight;
 
-  let playerX = gameWidth / 2 - 20;
-  let playerY = gameHeight / 2 - 20;
-
+  // Centra el player en el contenedor
+  let playerX = gameWidth / 2 - 15; // 15 = la mitad del ancho del player
+  let playerY = gameHeight / 2 - 15;
   player.style.left = `${playerX}px`;
   player.style.top = `${playerY}px`;
 
+  spawnCoin();
+  setInterval(spawnCoin, 3000);
+
+  // Guarda los límites para uso global
   player.dataset.moveWidth = gameWidth;
   player.dataset.moveHeight = gameHeight;
-
-  spawnCoin();
-  setInterval(spawnCoin, 2000);
-  setInterval(collectCoins, 100);
 });
-
 
 document.addEventListener("keydown", function (event) {
   const player = document.querySelector(".game-player");
-
   const moveWidth = parseFloat(player.dataset.moveWidth);
   const moveHeight = parseFloat(player.dataset.moveHeight);
+  collectCoins();
 
   let playerX = parseInt(player.style.left);
   let playerY = parseInt(player.style.top);
 
   switch (event.key) {
     case "ArrowUp":
-      if (playerY > 0) playerY -= 10;
+      if (playerY > 0) {
+        playerY -= 10;
+      }
       break;
     case "ArrowDown":
-      if (playerY < moveHeight - 40) playerY += 10;
+      if (playerY < moveHeight - 30) {
+        playerY += 10;
+      }
       break;
     case "ArrowLeft":
-      if (playerX > 0) playerX -= 10;
+      if (playerX > 0) {
+        playerX -= 10;
+      }
       break;
     case "ArrowRight":
-      if (playerX < moveWidth - 40) playerX += 10;
+      if (playerX < moveWidth - 30) {
+        playerX += 10;
+      }
       break;
     default:
       return;
@@ -55,15 +61,13 @@ document.addEventListener("keydown", function (event) {
 function spawnCoin() {
   const coin = document.createElement("div");
   coin.classList.add("coin");
-
   const gameContainer = document.querySelector(".game-container");
-
   const gameWidth = gameContainer.clientWidth;
   const gameHeight = gameContainer.clientHeight;
 
+  // Moneda en cualquier parte del contenedor
   const coinX = Math.random() * (gameWidth - 24);
   const coinY = Math.random() * (gameHeight - 24);
-
   coin.style.left = `${coinX}px`;
   coin.style.top = `${coinY}px`;
 
@@ -78,7 +82,7 @@ function collectCoins() {
   const player = document.querySelector(".game-player");
   const coins = document.querySelectorAll(".coin");
   const scoreBox = document.getElementById("score-box");
-  const message = document.getElementById("message");
+  const message = document.getElementById("message"); // 🔥 ESTO FALTABA
 
   coins.forEach((coin) => {
     const coinRect = coin.getBoundingClientRect();
@@ -92,7 +96,8 @@ function collectCoins() {
     ) {
       coin.remove();
       score++;
-      scoreBox.value = score;
+
+      if (scoreBox) scoreBox.value = score;
 
       const mensajes = [
         "Hwa... esta canción es para ti 💌",
@@ -101,11 +106,13 @@ function collectCoins() {
         "Eres mi inspiración ✨",
       ];
 
-      message.textContent =
-        mensajes[Math.floor(Math.random() * mensajes.length)];
+      if (message) {
+        message.textContent =
+          mensajes[Math.floor(Math.random() * mensajes.length)];
 
-      if (score === 10) {
-        message.textContent = "Encontraste a Seonghwa 💖";
+        if (score === 10) {
+          message.textContent = "Encontraste a Seonghwa 💖";
+        }
       }
     }
   });
